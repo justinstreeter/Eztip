@@ -6,9 +6,13 @@
         android:title="@string/action_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView" />
-    <item android:id="@+id/action_compose"
-        android:icon="@drawable/abc_ic_commit_search_api_mtrl_alpha"
-        android:title="@string/action_compose" />
+
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_about" android:title="@string/action_about"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_help" android:title="@string/action_help"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_mail" android:title="@string/Contactus"
+        android:orderInCategory="100" app:showAsAction="never"/>
 </menu>

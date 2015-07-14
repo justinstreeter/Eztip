@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
         // get all the user input from the EditText fields
-        EditText total   = (EditText)findViewById(R.id.total);
+        EditText total   = ((EditText)findViewById(R.id.total);
         EditText people   = (EditText)findViewById(R.id.people);
         EditText tip   = (EditText)findViewById(R.id.percent);
         EditText each   = (EditText)findViewById(R.id.tip);
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Show what everyone pays in the EditText field
-        each.setText("$"+EachPay);
-        tiptotal.setText("$"+TipPay);
+        each.setText("$"+EachPay+ " Total + Tip");
+        tiptotal.setText("$"+TipPay+ " Tip Each");
     }
 
     public void restoreActionBar() {

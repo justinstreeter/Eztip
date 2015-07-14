@@ -21,9 +21,9 @@
     <string name="contacts">Contacts</string>
     <string name="people">Number of People</string>
     <string name="tipammount"> Tip Precent</string>
-    <string name="totaleg">Ex. 100.99 </string>
-    <string name="peopleeg">Ex. 4 </string>
-    <string name="percenteg">Ex. 15</string>
+    <string name="totaleg">Total. Ex. 100 </string>
+    <string name="peopleeg"># of People. Ex. 4 </string>
+    <string name="percenteg">Percent. Ex. 15</string>
     <string name="split">Tip</string>
     <string name="each">Tip Ammount</string>
     <string name="tiptotal">Total plus Tip</string>

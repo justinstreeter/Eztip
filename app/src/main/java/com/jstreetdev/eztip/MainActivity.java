@@ -2,15 +2,19 @@ package com.jstreetdev.eztip;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,41 +23,58 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Button button = (Button) findViewById(R.id.maketip);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Hide Numpad onClick - when the button is pressed
+                //InputMethodManager inputManager = (InputMethodManager)
+                //      getSystemService(Context.INPUT_METHOD_SERVICE);
+                //inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                //      InputMethodManager.HIDE_NOT_ALWAYS);
+                // get all the user input from the EditText fields
+                EditText total = (EditText) findViewById(R.id.total);
+                EditText people = (EditText) findViewById(R.id.people);
+                EditText tip = (EditText) findViewById(R.id.percent);
+                EditText each = (EditText) findViewById(R.id.tip);
+                EditText tiptotal = (EditText) findViewById(R.id.tiptotal2);
 
+
+                // Convert all user input to Float
+                int total1 = total.getText().length();
+                double totalVar = Double.parseDouble(total.getText().toString());
+                float peopleVar = Float.parseFloat(people.getText().toString());
+                float tipVar = Float.parseFloat(tip.getText().toString());
+                // Calculate total * tip + total / people
+
+                if (total1 != 0) {
+                    // Round it up to 2 decimal points
+                    double calc = (totalVar * (tipVar / 100) + totalVar) / peopleVar;
+                    double calc2 = (totalVar * (tipVar / 100)) / peopleVar;
+
+                    String EachPay = String.format("%.2f", calc);
+                    String TipPay = String.format("%.2f", calc2);
+
+
+                    // Show what everyone pays in the EditText field
+                    each.setText("$" + EachPay + " Total + Tip");
+                    tiptotal.setText("$" + TipPay + " Tip Each");
+                    total.setText("");
+                    people.setText("");
+                    tip.setText("");
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Value must be Entered", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    public void calculate(View view){
-        // Hide Numpad onClick - when the button is pressed
-        InputMethodManager inputManager = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                InputMethodManager.HIDE_NOT_ALWAYS);
-        // get all the user input from the EditText fields
-        EditText total   = ((EditText)findViewById(R.id.total);
-        EditText people   = (EditText)findViewById(R.id.people);
-        EditText tip   = (EditText)findViewById(R.id.percent);
-        EditText each   = (EditText)findViewById(R.id.tip);
-        EditText tiptotal = (EditText)findViewById(R.id.tiptotal2);
-
-        // Convert all user input to Float
-        double totalVar = Double.parseDouble(total.getText().toString());
-        float peopleVar = Float.parseFloat(people.getText().toString());
-        float tipVar = Float.parseFloat(tip.getText().toString());
-        // Calculate total * tip + total / people
-        double calc = (totalVar * (tipVar/100) + totalVar) / peopleVar;
-        double calc2 = (totalVar * (tipVar/100)) / peopleVar;
-
-        // Round it up to 2 decimal points
-
-        String people1 = people.getText().toString();
-        String EachPay = String.format("%.2f", calc);
-        String TipPay = String.format("%.2f", calc2);
 
 
-        // Show what everyone pays in the EditText field
-        each.setText("$"+EachPay+ " Total + Tip");
-        tiptotal.setText("$"+TipPay+ " Tip Each");
-    }
+
+
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -61,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(true);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
